@@ -1,12 +1,59 @@
-# React + Vite
+# Rubik App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 **Live Demo**: [rubik.saiteja.online](https://rubik.saiteja.online)
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd fashion-pose-app
+   ```
 
-## Expanding the ESLint configuration
+2. **Install dependencies**
+   ```bash
+   yarn install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. **Environment setup**
+   - Copy `.env.example` to `.env`
+   - Configure your environment variables
+
+4. **Start development server**
+   ```bash
+   yarn run dev
+   ```
+   The app will be available at `http://localhost:5173`
+
+## Features
+
+### Single Upload
+- Process images directly in the browser
+- Generate multiple views/variations
+- Upload processed images to server
+
+### Batch Upload
+- Upload multiple images simultaneously
+- Generate S3 URLs for efficient processing
+- Send batch requests to server
+- Server adds jobs to RabbitMQ queue
+- Background processing script handles queued items
+- Real-time status updates
+
+## Architecture
+
+The application uses a queue-based processing system:
+1. Images are uploaded and queued via RabbitMQ
+2. Background workers process items from the queue
+3. Status updates are provided in real-time
+4. Processed results are stored and made available
+
+## Built With
+
+- **React** - Modern JavaScript library for building user interfaces
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **Vite** - Fast build tool and development server
+
+---
+
+*Built with modern web technologies for efficient image processing and handling.*
