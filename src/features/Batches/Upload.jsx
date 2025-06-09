@@ -8,6 +8,7 @@ import FashionBatchTable from "./ViewBatches";
 const BatchUpload = () => {
   const [images, setImages] = useState([]);
   const [urlInput, setUrlInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [dragActive, setDragActive] = useState(false);
   const [selectedImages, setSelectedImages] = useState(new Set());
@@ -119,6 +120,7 @@ const BatchUpload = () => {
 
   const uploadImages = async () => {
     try {
+      setLoading(true);
       // Separate files and URLs
       const filesToUpload = images.filter((img) => img.type === "file");
       const urlImages = images.filter((img) => img.type === "url");
@@ -170,6 +172,8 @@ const BatchUpload = () => {
     } catch (err) {
       console.error("Upload error:", err);
       toast.error("Failed to upload images. Check console for details.");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -360,7 +364,7 @@ const BatchUpload = () => {
                     onClick={uploadImages}
                     className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
-                    Upload {images.length} Image{images.length !== 1 ? "s" : ""}
+                    {loading ? `Uploading...` : `Upload ${images.length} Image${images.length !== 1 ? "s" : ""}`}
                   </button>
                 </div>
               </div>
